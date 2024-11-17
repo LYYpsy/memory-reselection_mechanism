@@ -1,0 +1,19 @@
+#! /bin/bash
+
+root=/media/dell/AAfMRI/Results
+
+for subj in  17 18 ; do    
+indir=$root/$subj/GLM/${subj}
+outdir=$root/MeanBeta234
+
+con1=PRE
+con2=POST
+       
+mkdir -p $outdir/
+for thecon in ${con1} ${con2}  ;do  
+3dTstat -prefix $outdir/${thecon}_mean.nii.gz $indir/iresp_${thecon}.${subj}+tlrc[2,3,4] -overwrite            #
+done
+
+done 
+
+

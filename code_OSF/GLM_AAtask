@@ -1,0 +1,60 @@
+#!/bin/bash
+
+data_root=/media/dell/AAfMRI
+
+for subj in 17 18 ; do    #
+con=R12a34a
+ 
+indir=$data_root/Results/Preprocessed/$subj_preprocessed/${subj}.pre.results
+stim_infor=$data_root/stim_information/${subj}
+outdir=$data_root/Results/GLM/${con}/${subj}_${con}
+
+	
+con1=R12s
+con2=R12r
+con3=R34s
+con4=R34r
+con5=sur
+
+rm -r $outdir
+
+   
+echo -----------------------------------${subj}-${con}----------------------------------------------
+   
+   mkdir -p $outdir
+   cd $outdir
+   cp $data_root/MNI152_T1_2009c+tlrc* $outdir
+
+ 3dDeconvolve -input ${indir}/pb04.${subj}.pre.scale+tlrc  \
+                  -polort A \
+           -num_stimts 11 \
+           -stim_times 1 ${stim_infor}/${con1}.txt 'TENT(0,12,7)' -stim_label 1 ${con1} \
+           -stim_times 2 ${stim_infor}/${con2}.txt 'TENT(0,12,7)' -stim_label 2 ${con2} \
+           -stim_times 3 ${stim_infor}/${con3}.txt 'TENT(0,12,7)' -stim_label 3 ${con3} \
+           -stim_times 4 ${stim_infor}/${con4}.txt 'TENT(0,12,7)' -stim_label 4 ${con4} \
+           -stim_times 5 ${stim_infor}/${con5}.txt 'TENT(0,12,7)' -stim_label 5 ${con5} \
+           -stim_file 6 ${indir}/${subj}_R12aR34a_dfile.1D'[0]' -stim_base 6 -stim_label 6 roll \
+           -stim_file 7 ${indir}/${subj}_R12aR34a_dfile.1D'[1]' -stim_base 7 -stim_label 7 pitch \
+           -stim_file 8 ${indir}/${subj}_R12aR34a_dfile.1D'[2]' -stim_base 8 -stim_label 8 yaw \
+           -stim_file 9 ${indir}/${subj}_R12aR34a_dfile.1D'[3]' -stim_base 9 -stim_label 9 ds \
+           -stim_file 10 ${indir}/${subj}_R12aR34a_dfile.1D'[4]' -stim_base 10 -stim_label 10 dl \
+           -stim_file 11 ${indir}/${subj}_R12aR34a_dfile.1D'[5]' -stim_base 11 -stim_label 11 dp \
+           -censor ${indir}/${subj}_R12aR34a_motion_censor.1D     \
+           -gltsym "SYM: ${con1} -${con3}" -glt_label 1 ${con1}-${con3}           \
+           -iresp 1 ${con1} -overwrite     \
+           -iresp 2 ${con2} -overwrite     \
+           -iresp 3 ${con3} -overwrite     \
+           -iresp 4 ${con4} -overwrite     \
+           -iresp 5 ${con5} -overwrite     \
+           -fout -tout -full_first -x1D X_matrix.xmat.1D -fitts fitts_${con} -bucket ${subj}_${con}_bucket 
+
+ done
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,127 @@
+#!/bin/bash
+
+root=/media/dell/AAfMRI/Results
+ 
+con=AA      #OR localizertask
+conA=PRE           #face
+conB=POST            #house
+       
+mask=maskGray    
+
+indir=$root/GLM
+outdir=$root/Group
+
+ mkdir -p $outdir
+ cd $outdir
+
+ echo " %%%%%%%%%%%%%%%%%%%% $outdir %%%%%%%%%%%%%%%%%%%%%%%"    
+ cp /media/dell/Dong/AAfMRI/MNI152_T1_2009c+tlrc* $outdir 
+ 
+    cat > ${conA}_${conB}_${mask} << EOF
+3dttest++ -prefix ${conA}_${conB}_${mask} -overwrite        \
+   -mask $root/Group/${mask}_MNI152_2009C_3mm.nii.gz                       \
+   -AminusB                                                       \
+  -setA ${conA}                                        \
+   17 '${indir}/17_${con}/${conA}.nii.gz'         \
+   18 '${indir}/18_${con}/${conA}.nii.gz'         \
+   20 '${indir}/20_${con}/${conA}.nii.gz'         \
+   21 '${indir}/21_${con}/${conA}.nii.gz'         \
+   22 '${indir}/22_${con}/${conA}.nii.gz'         \
+   23 '${indir}/23_${con}/${conA}.nii.gz'         \
+   24 '${indir}/24_${con}/${conA}.nii.gz'         \
+   25 '${indir}/25_${con}/${conA}.nii.gz'         \
+   26 '${indir}/26_${con}/${conA}.nii.gz'         \
+   28 '${indir}/28_${con}/${conA}.nii.gz'         \
+   29 '${indir}/29_${con}/${conA}.nii.gz'         \
+   30 '${indir}/30_${con}/${conA}.nii.gz'         \
+   31 '${indir}/31_${con}/${conA}.nii.gz'         \
+   32 '${indir}/32_${con}/${conA}.nii.gz'         \
+   33 '${indir}/33_${con}/${conA}.nii.gz'         \
+   34 '${indir}/34_${con}/${conA}.nii.gz'         \
+   35 '${indir}/35_${con}/${conA}.nii.gz'         \
+   37 '${indir}/37_${con}/${conA}.nii.gz'         \
+   38 '${indir}/38_${con}/${conA}.nii.gz'         \
+   40 '${indir}/40_${con}/${conA}.nii.gz'         \
+   41 '${indir}/41_${con}/${conA}.nii.gz'         \
+   42 '${indir}/42_${con}/${conA}.nii.gz'         \
+   43 '${indir}/43_${con}/${conA}.nii.gz'         \
+   44 '${indir}/44_${con}/${conA}.nii.gz'         \
+   45 '${indir}/45_${con}/${conA}.nii.gz'         \
+   46 '${indir}/46_${con}/${conA}.nii.gz'         \
+   47 '${indir}/47_${con}/${conA}.nii.gz'         \
+   48 '${indir}/48_${con}/${conA}.nii.gz'         \
+   49 '${indir}/49_${con}/${conA}.nii.gz'         \
+   50 '${indir}/50_${con}/${conA}.nii.gz'         \
+   51 '${indir}/51_${con}/${conA}.nii.gz'         \
+   52 '${indir}/52_${con}/${conA}.nii.gz'         \
+   53 '${indir}/53_${con}/${conA}.nii.gz'         \
+   54 '${indir}/54_${con}/${conA}.nii.gz'         \
+   55 '${indir}/55_${con}/${conA}.nii.gz'         \
+   56 '${indir}/56_${con}/${conA}.nii.gz'         \
+   57 '${indir}/57_${con}/${conA}.nii.gz'         \
+   58 '${indir}/58_${con}/${conA}.nii.gz'         \
+   59 '${indir}/59_${con}/${conA}.nii.gz'         \
+   60 '${indir}/60_${con}/${conA}.nii.gz'         \
+   61 '${indir}/61_${con}/${conA}.nii.gz'         \
+   62 '${indir}/62_${con}/${conA}.nii.gz'         \
+   63 '${indir}/63_${con}/${conA}.nii.gz'         \
+   64 '${indir}/64_${con}/${conA}.nii.gz'         \
+   66 '${indir}/66_${con}/${conA}.nii.gz'         \
+   67 '${indir}/67_${con}/${conA}.nii.gz'         \
+   68 '${indir}/68_${con}/${conA}.nii.gz'         \
+   -setB ${conB}                                   \
+   17 '${indir}/17_${con}/${conB}.nii.gz'         \
+   18 '${indir}/18_${con}/${conB}.nii.gz'         \
+   20 '${indir}/20_${con}/${conB}.nii.gz'         \
+   21 '${indir}/21_${con}/${conB}.nii.gz'         \
+   22 '${indir}/22_${con}/${conB}.nii.gz'         \
+   23 '${indir}/23_${con}/${conB}.nii.gz'         \
+   24 '${indir}/24_${con}/${conB}.nii.gz'         \
+   25 '${indir}/25_${con}/${conB}.nii.gz'         \
+   26 '${indir}/26_${con}/${conB}.nii.gz'         \
+   28 '${indir}/28_${con}/${conB}.nii.gz'         \
+   29 '${indir}/29_${con}/${conB}.nii.gz'         \
+   30 '${indir}/30_${con}/${conB}.nii.gz'         \
+   31 '${indir}/31_${con}/${conB}.nii.gz'         \
+   32 '${indir}/32_${con}/${conB}.nii.gz'         \
+   33 '${indir}/33_${con}/${conB}.nii.gz'         \
+   34 '${indir}/34_${con}/${conB}.nii.gz'         \
+   35 '${indir}/35_${con}/${conB}.nii.gz'         \
+   37 '${indir}/37_${con}/${conB}.nii.gz'         \
+   38 '${indir}/38_${con}/${conB}.nii.gz'         \
+   40 '${indir}/40_${con}/${conB}.nii.gz'         \
+   41 '${indir}/41_${con}/${conB}.nii.gz'         \
+   42 '${indir}/42_${con}/${conB}.nii.gz'         \
+   43 '${indir}/43_${con}/${conB}.nii.gz'         \
+   44 '${indir}/44_${con}/${conB}.nii.gz'         \
+   45 '${indir}/45_${con}/${conB}.nii.gz'         \
+   46 '${indir}/46_${con}/${conB}.nii.gz'         \
+   47 '${indir}/47_${con}/${conB}.nii.gz'         \
+   48 '${indir}/48_${con}/${conB}.nii.gz'         \
+   49 '${indir}/49_${con}/${conB}.nii.gz'         \
+   50 '${indir}/50_${con}/${conB}.nii.gz'         \
+   51 '${indir}/51_${con}/${conB}.nii.gz'         \
+   52 '${indir}/52_${con}/${conB}.nii.gz'         \
+   53 '${indir}/53_${con}/${conB}.nii.gz'         \
+   54 '${indir}/54_${con}/${conB}.nii.gz'         \
+   55 '${indir}/55_${con}/${conB}.nii.gz'         \
+   56 '${indir}/56_${con}/${conB}.nii.gz'         \
+   57 '${indir}/57_${con}/${conB}.nii.gz'         \
+   58 '${indir}/58_${con}/${conB}.nii.gz'         \
+   59 '${indir}/59_${con}/${conB}.nii.gz'         \
+   60 '${indir}/60_${con}/${conB}.nii.gz'         \
+   61 '${indir}/61_${con}/${conB}.nii.gz'         \
+   62 '${indir}/62_${con}/${conB}.nii.gz'         \
+   63 '${indir}/63_${con}/${conB}.nii.gz'         \
+   64 '${indir}/64_${con}/${conB}.nii.gz'         \
+   66 '${indir}/66_${con}/${conB}.nii.gz'         \
+   67 '${indir}/67_${con}/${conB}.nii.gz'         \
+   68 '${indir}/68_${con}/${conB}.nii.gz'         \
+   -paired                                        \
+  -Clustsim 40  \
+
+EOF
+tcsh  ${conA}_${conB}_${mask}
+
+rm *.1D
+

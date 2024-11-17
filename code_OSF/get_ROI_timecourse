@@ -1,0 +1,18 @@
+#! /bin/bash
+ root=/media/dell/AAfMRI/Results/DCM
+
+for subj in 17 18 ; do    # 
+indir=$root/subject/${subj}/infile
+ROIdir=$root/GroupROI
+outdir=$root/subject/${subj}/infile/timecourse
+
+mkdir -p $outdir
+cd $outdir
+echo "--------------------------------"${subj}"---------------------"
+for ROI in SMG DLPFC rATL  rFFA  lATL  lFFA;do #
+rm ${ROI}.1d 
+3dmaskave -q -mask ${ROIdir}/${ROI}.nii ${indir}/${subj}.nii >> ${ROI}.1d  
+
+done
+done
+
